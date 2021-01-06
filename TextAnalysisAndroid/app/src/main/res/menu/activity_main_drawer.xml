@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/itm_check_text"
+            android:title="Check Text" />
+        <item
+            android:id="@+id/itm_add_words"
+            android:title="Add Words" />
+
+        <item
+            android:id="@+id/itm_sign_in"
+            android:title="Sign In" />
+
+        <item
+            android:id="@+id/itm_sign_up"
+            android:title="Sign Up" />
+
+        <item
+            android:id="@+id/itm_sign_out"
+            android:title="Sign Out"/>
+
+    </group>
+
+</menu>

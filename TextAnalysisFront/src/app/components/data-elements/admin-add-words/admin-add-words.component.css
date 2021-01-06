@@ -1,0 +1,25 @@
+table {
+    width: 100%;
+    text-align: center;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  ::ng-deep .mat-sort-header-container {
+    /* border: 1px solid black; */
+    display:flex;
+    justify-content:center;
+  }
+  
+   .mat-header-cell {
+    /* border: 1px solid black; */
+    /* display: inline-block; */
+    /* justify-content: center; */
+    text-align: center;
+   }
+  
+   /* .mat-cell{
+     border: 1px solid black;
+   } */

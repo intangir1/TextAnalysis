@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="expansion_layout_synonims" type="id"/>
+    <item name="expansion_layout_antonims" type="id"/>
+    <item name="expansion_layout_irregulars" type="id"/>
+    <item name="expansion_layout_slangs" type="id"/>
+    <item name="expansion_layout_archaisms" type="id"/>
+    <item name="expansion_layout_expressions" type="id"/>
+</resources>

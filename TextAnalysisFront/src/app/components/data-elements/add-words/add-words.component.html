@@ -1,0 +1,188 @@
+<mat-accordion>
+  <mat-expansion-panel hideToggle *ngFor="let type of synonims_antonims; let i = index" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+    <mat-expansion-panel-header (click)="NewTab($event)">
+      <mat-panel-title>{{type}}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form class="example-form row">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>{{type}}</mat-label>
+        <input matInput *ngIf="type === 'Synonim'" [formControl]="wordFormControl[i]" [(ngModel)]="synonimToSend" placeholder="Synonim">
+        <!-- <button mat-button *ngIf="type === 'Synonim' && synonimToSend" matSuffix mat-icon-button aria-label="Clear" (click)="synonimToSend=''">
+          <mat-icon>close</mat-icon>
+        </button> -->
+        
+        <input matInput *ngIf="type === 'Antonim'" [formControl]="wordFormControl[i]" [(ngModel)]="antonimToSend" placeholder="Antonim">
+        <!-- <button mat-button *ngIf="type === 'Antonim' && antonimToSend" matSuffix mat-icon-button aria-label="Clear" (click)="antonimToSend=''">
+          <mat-icon>close</mat-icon>
+        </button> -->
+        
+        
+        <mat-error *ngIf="wordFormControl[i].hasError('required')">
+          {{type}} is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Connection Word</mat-label>
+        
+        <mat-select matInput list="synonimConnections" *ngIf="type === 'Synonim'" [(ngModel)]="selectedSynonimConnection" name="synonim">
+          <mat-option *ngFor="let connectionSynonim of synonimConnections" value="{{connectionSynonim}}">{{ connectionSynonim }}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedSynonimConnection" matSuffix mat-icon-button aria-label="Clear" (click)="ClearSelected($event)">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <mat-select matInput list="antonimConnections" *ngIf="type === 'Antonim'" [(ngModel)]="selectedAntonimConnection" name="antonim">
+          <mat-option *ngFor="let connectionAntonim of antonimConnections" value="{{connectionAntonim}}">{{ connectionAntonim }}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedAntonimConnection" matSuffix mat-icon-button aria-label="Clear" (click)="ClearSelected($event)">
+          <mat-icon>close</mat-icon>
+        </button>
+        
+        <!-- <input matInput list="synonimConnections" *ngIf="type === 'Synonim'" [(ngModel)]="selectedSynonimConnection" name="word">
+        <datalist id="synonimConnections">
+          <option *ngFor="let connectionSynonim of synonimConnections" value="{{connectionSynonim}}">
+        </datalist> -->
+
+        <!-- <input matInput list="antonimConnections" *ngIf="type === 'Antonim'" [(ngModel)]="selectedAntonimConnection" name="word">
+        <datalist id="antonimConnections">
+          <option *ngFor="let connectionAntonim of antonimConnections" value="{{connectionAntonim}}">
+        </datalist> -->
+      </mat-form-field>
+      
+      <mat-button-toggle-group class="right" [disabled]="wordFormControl[i].hasError('required')" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle *ngIf="type === 'Synonim'" (click)="Post(type)" value="Post">Post</mat-button-toggle>
+        <mat-button-toggle *ngIf="type === 'Synonim'" (click)="Put(type)" [disabled]="!selectedSynonimConnection" value="Put">Put</mat-button-toggle>
+        <mat-button-toggle *ngIf="type === 'Synonim'" (click)="Insert(type)" [disabled]="!selectedSynonimConnection" value="Insert">Insert</mat-button-toggle>
+
+        <mat-button-toggle *ngIf="type === 'Antonim'" (click)="Post(type)" [disabled]="!selectedAntonimConnection" value="Post">Post</mat-button-toggle>
+        <mat-button-toggle *ngIf="type === 'Antonim'" (click)="Put(type)" [disabled]="!selectedAntonimConnection" value="Put">Put</mat-button-toggle>
+        <mat-button-toggle *ngIf="type === 'Antonim'" (click)="Insert(type)" [disabled]="!selectedAntonimConnection" value="Insert">Insert</mat-button-toggle>
+      </mat-button-toggle-group>
+
+    </form>
+
+  </mat-expansion-panel>
+  
+
+
+  <mat-expansion-panel hideToggle *ngFor="let otherType of otherTypes; let i = index" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+    <mat-expansion-panel-header (click)="NewTab($event)">
+      <mat-panel-title>{{otherType}}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form class="example-form">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>{{otherType}}</mat-label>
+        <input matInput *ngIf="otherType === 'Archaism'" [formControl]="wordFormControls[i]" [(ngModel)]="archaismToSend" placeholder="Word">
+        <input matInput *ngIf="otherType === 'Expression'" [formControl]="wordFormControls[i]" [(ngModel)]="expressionToSend" placeholder="Word">
+        <input matInput *ngIf="otherType === 'Slang'" [formControl]="wordFormControls[i]" [(ngModel)]="slangToSend" placeholder="Word">
+        <mat-error *ngIf="wordFormControls[i].hasError('required')">
+          {{otherType}} is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Connection Word</mat-label>
+
+        <mat-select matInput list="archaismConnections" *ngIf="otherType === 'Archaism'" [(ngModel)]="selectedArchaismConnection" name="archaism">
+          <mat-option *ngFor="let connectionArchaism of archaismConnections" value="{{connectionArchaism}}">{{ connectionArchaism }}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedArchaismConnection" matSuffix mat-icon-button aria-label="Clear" (click)="ClearSelected($event)">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <mat-select matInput list="expressionConnections" *ngIf="otherType === 'Expression'" [(ngModel)]="selectedExpressionConnection" name="expression">
+          <mat-option *ngFor="let connectionExpression of expressionConnections" value="{{connectionExpression}}">{{ connectionExpression }}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedExpressionConnection" matSuffix mat-icon-button aria-label="Clear" (click)="ClearSelected($event)">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <mat-select matInput list="slangConnections" *ngIf="otherType === 'Slang'" [(ngModel)]="selectedSlangConnection" name="slang">
+          <mat-option *ngFor="let connectionSlang of slangConnections" value="{{connectionSlang}}">{{ connectionSlang }}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedSlangConnection" matSuffix mat-icon-button aria-label="Clear" (click)="ClearSelected($event)">
+          <mat-icon>close</mat-icon>
+        </button>
+        
+        <!-- <input matInput list="archaismConnections" *ngIf="otherType === 'Archaism'" [(ngModel)]="selectedWordConnection" name="word">
+        <datalist id="archaismConnections">
+          <option *ngFor="let connectionWord of archaismConnections" value="{{connectionWord}}">
+        </datalist>
+
+        <input matInput list="expressionConnections" *ngIf="otherType === 'Expression'" [(ngModel)]="selectedWordConnection" name="word">
+        <datalist id="expressionConnections">
+          <option *ngFor="let connectionWord of expressionConnections" value="{{connectionWord}}">
+        </datalist>
+
+        <input matInput list="slangConnections" *ngIf="otherType === 'Slang'" [(ngModel)]="selectedWordConnection" name="word">
+        <datalist id="slangConnections">
+          <option *ngFor="let connectionWord of slangConnections" value="{{connectionWord}}">
+        </datalist> -->
+        
+      </mat-form-field>
+
+      <mat-button-toggle-group class="right" [disabled]="wordFormControls[i].hasError('required')" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle (click)="Post(otherType)" value="Post">Post</mat-button-toggle>
+
+        <mat-button-toggle *ngIf="otherType === 'Archaism'" (click)="Put(otherType)" [disabled]="!selectedArchaismConnection" value="Put">Put</mat-button-toggle>
+        <mat-button-toggle *ngIf="otherType === 'Expression'" (click)="Put(otherType)" [disabled]="!selectedExpressionConnection" value="Put">Put</mat-button-toggle>
+        <mat-button-toggle *ngIf="otherType === 'Slang'" (click)="Put(otherType)" [disabled]="!selectedSlangConnection" value="Put">Put</mat-button-toggle>
+
+      </mat-button-toggle-group>
+
+    </form>
+
+  </mat-expansion-panel>
+  
+
+
+  <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+    <mat-expansion-panel-header (click)="NewTab($event)">
+      <mat-panel-title>{{irregularType}}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form class="example-form">
+      
+      <mat-form-field class="example-full-width" *ngFor="let number of [1,2,3]; let i = index">
+        <mat-label>{{irregularType}} {{number}}</mat-label>
+        <input matInput [formControl]="irregularFormControls[i]" [(ngModel)]="irregelarToSend[i]" placeholder="Word">
+        <mat-error *ngIf="irregularFormControls[i].hasError('required')">
+          {{irregularType}} {{number}} is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Connection Word</mat-label>
+
+        <mat-select matInput list="irregularConnections" *ngIf="irregularType === 'Irregular'" [(ngModel)]="selectedIrregularConnection" name="irregular">
+          <mat-option *ngFor="let connectionIrregular of irregularConnections" value="{{connectionIrregular.first}}">{{ connectionIrregular.first }}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedIrregularConnection" matSuffix mat-icon-button aria-label="Clear" (click)="ClearSelected($event)">
+          <mat-icon>close</mat-icon>
+        </button>
+
+
+        <!-- <input matInput list="irregularConnections" *ngIf="irregularType === 'Irregular'" [(ngModel)]="selectedWordConnection" name="word">
+        <datalist id="irregularConnections">
+          <option *ngFor="let connectionWord of irregularConnections" value="{{connectionWord.first}}">
+        </datalist> -->
+      </mat-form-field>
+
+      <mat-button-toggle-group class="right" [disabled]="irregularFormControls[0].hasError('required') || irregularFormControls[1].hasError('required') || irregularFormControls[2].hasError('required')" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle (click)="Post(irregularType)" value="Post">Post</mat-button-toggle>
+        <mat-button-toggle (click)="Put(irregularType)" [disabled]="!selectedIrregularConnection" value="Put">Put</mat-button-toggle>
+      </mat-button-toggle-group>
+
+    </form>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

@@ -1,0 +1,79 @@
+textarea {
+    resize: none!important;
+}
+
+textarea:focus{
+    border: none!important;
+    overflow: auto!important;
+    outline: none!important;
+
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow: none!important;
+}
+
+.ta {
+    margin-top: 4px;
+    border: 1px inset #ccc;
+    background-color: white;
+    font: small courier, monospace black;
+    height: 96px;
+    overflow: auto;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 10px;
+}
+
+.border {
+    border: 1px inset #ccc;
+    background-color: white;
+    font: small courier, monospace black;
+}
+
+li {
+    display:inline;
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  #gradRepeated {
+    text-align:center;
+    height: 20px;
+    background-color: rgb(255, 0, 0); /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0));
+    color: black;
+  }
+
+  #gradArchaisms {
+    text-align:center;
+    height: 20px;
+    background-color: rgb(0, 255, 0); /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, rgb(0, 255, 0), rgb(0, 255, 255));
+    color: black;
+  }
+
+  #gradSlangs {
+    text-align:center;
+    height: 20px;
+    background-color: rgb(0, 0, 255); /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, rgb(0, 0, 255), rgb(255, 0, 255));
+    color: blanchedalmond;
+  }
+
+  #gradExpressions {
+    text-align:center;
+    height: 20px;
+    background-color: rgb(255, 153, 153);
+    color: blanchedalmond;
+  }

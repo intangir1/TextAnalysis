@@ -1,0 +1,15 @@
+antonyms
+Dull 	Unimaginative 	Lifeless 		Tedious		Tiresome 	Amazing
+Calm 	Quiet 			Peaceful 		Unruffled 	Tranquil 	Angry
+Ask		Question 		Inquire 		Query 		Interrogate Answer
+Good 	Excellent 		Apt 			Marvelous 	Qualified 	Bad
+Ugly 	Horrible 		Unpleasant 		Monstrous 	Terrifying 	Beautiful
+End		Stop 			Finish 			Terminate 	Conclude 	Begin
+Little 	Dinky 			Puny 			Diminutive 	Miniature 	Big
+Dark 	Shadowy 		Unlit 			Murky 		Gloomy 		Bright
+True 	Accurate 		Right 			Proper 		Precise 	False
+Slow 	Unhurried 		Behind 			Tedious 	Slack 		Fast
+Love 	Like 			Admire 			Esteem 		Fancy 		Hate
+Show 	Display 		Exhibit 		Present 	Note 		Hide
+Stop 	Cease 			Halt 			Stay 		Pause 		Move
+Old		Aged 			Used 			Worn 		Dilapidated New

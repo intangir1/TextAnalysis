@@ -1,0 +1,45 @@
+<form #myform="ngForm">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <mat-form-field class="form-group col-md-12">
+      <mat-label >UserName</mat-label>
+      <input matInput #usernameInfo="ngModel" required minlength="2" type="text" name="UserName2" id="UserName2" [(ngModel)]="login.userNickName">
+      <button mat-button *ngIf="login.userNickName" matSuffix mat-icon-button aria-label="Clear" (click)="login.userNickName=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="usernameInfo.errors?.required && usernameInfo.touched">
+        Missing user name
+      </mat-error>
+      <mat-error *ngIf="usernameInfo.errors?.minlength && usernameInfo.touched">
+        Minimum two chars
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="form-group col-md-12">
+      <mat-label>Password</mat-label>
+      <input matInput #passwordInfo="ngModel" required minlength="2" type="password" name="Password2" id="Password2" [(ngModel)]="login.userPassword">
+      <button mat-button *ngIf="login.userPassword" matSuffix mat-icon-button aria-label="Clear" (click)="login.userPassword=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordInfo.errors?.required && passwordInfo.touched">
+        Missing user password
+      </mat-error>
+      <mat-error *ngIf="passwordInfo.errors?.minlength && passwordInfo.touched">
+        Minimum two chars
+      </mat-error>
+    </mat-form-field>
+
+    <p *ngIf="loginError!==''" class="ErrorColor">{{loginError}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button [disabled]="myform.form.invalid" class="btn btn-primary" (click)="signIn()">Sign In</button>
+  </div>
+
+</form>

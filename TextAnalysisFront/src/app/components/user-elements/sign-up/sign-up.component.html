@@ -1,0 +1,391 @@
+<!-- <form #formInfo="ngForm">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="form-row">
+
+      <mat-form-field class="form-group col-md-6">
+        <mat-label >FirstName</mat-label>
+        <input matInput #firstNameInfo="ngModel" required minlength="2" type="text" name="FirstName" id="FirstName" [(ngModel)]="userFirstName">
+        <button mat-button *ngIf="userFirstName" matSuffix mat-icon-button aria-label="Clear" (click)="userFirstName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="firstNameInfo.errors?.required && firstNameInfo.touched">
+          Missing user first name
+        </mat-error>
+        <mat-error *ngIf="firstNameInfo.errors?.minlength && firstNameInfo.touched">
+          Minimum two chars
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="form-group col-md-6">
+        <mat-label>LastName</mat-label>
+        <input matInput #lastNameInfo="ngModel" required minlength="2" type="text" name="LastName" id="LastName" [(ngModel)]="userLastName">
+        <button mat-button *ngIf="userLastName" matSuffix mat-icon-button aria-label="Clear" (click)="userLastName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="lastNameInfo.errors?.required && lastNameInfo.touched">
+          Missing user last name
+        </mat-error>
+        <mat-error *ngIf="lastNameInfo.errors?.minlength && lastNameInfo.touched">
+          Minimum two chars
+        </mat-error>
+      </mat-form-field>
+      
+    </div>
+    
+    <div class="form-row">
+
+      <mat-form-field class="form-group col-md-6">
+        <mat-label>ID</mat-label>
+        <input matInput #idInfo="ngModel" required minlength="8" type="text" name="ID" id="ID" (keypress)="numberOnly($event)" [(ngModel)]="userID">
+        <button mat-button *ngIf="userID" matSuffix mat-icon-button aria-label="Clear" (click)="userID=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="idInfo.errors?.required && idInfo.touched">
+          Missing user ID
+        </mat-error>
+        <mat-error *ngIf="idInfo.value !== '' && idInfo.errors?.minlength && idInfo.touched">
+          Minimum eight chars
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="form-group col-md-6">
+        <mat-label>BirthDate</mat-label>
+        <input matInput [matDatepicker]="picker" #birthDateInfo="ngModel" required name="BirthDate" id="BirthDate" [ngModel]="userBirthDate" [min]="minDate" [max]="maxDate" (ngModelChange)="userBirthDate = $event">
+        <mat-datepicker-toggle *ngIf="!userBirthDate" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <button mat-button *ngIf="userBirthDate" matSuffix mat-icon-button aria-label="Clear" (click)="userBirthDate=null">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="birthDateInfo.errors?.required && birthDateInfo.touched">
+          Missing user birthDate
+        </mat-error>
+      </mat-form-field>
+      
+    </div>
+          
+    <div class="form-row">
+
+      <mat-form-field class="form-group col-md-6">
+        <mat-label>Gender</mat-label>
+        <mat-select #genderInfo="ngModel" required type="text" name="Gender" id="Gender" [(ngModel)]="userGender">
+          <mat-option *ngFor="let genderChoise of genderChoises" value="{{genderChoise}}">{{ genderChoise }}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="userGender" matSuffix mat-icon-button aria-label="Clear" (click)="userGender=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="genderInfo.errors?.required && genderInfo.touched">
+          Missing user gender
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="form-group col-md-6">
+        <mat-label>Email</mat-label>
+        <input matInput #emailInfo="ngModel" required pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" type="email" name="Email" id="Email" [(ngModel)]="userEmail">
+        <button mat-button *ngIf="userEmail" matSuffix mat-icon-button aria-label="Clear" (click)="userEmail=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="emailInfo.errors?.required && emailInfo.touched">
+          Missing user email
+        </mat-error>
+        <mat-error *ngIf="emailInfo.errors && !emailInfo.errors?.required && emailInfo.value !== '' && (emailInfo.touched || emailInfo.dirty)">
+          Wrong User email
+        </mat-error>
+      </mat-form-field>
+      
+    </div>
+          
+    <div class="form-row">
+
+      <mat-form-field class="form-group col-md-4">
+        <mat-label>UserName</mat-label>
+        <input matInput #usernameInfo="ngModel" required minlength="2" type="text" name="UserName" id="UserName" [(ngModel)]="userNickName">
+        <button mat-button *ngIf="userNickName" matSuffix mat-icon-button aria-label="Clear" (click)="userNickName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="usernameInfo.errors?.required && usernameInfo.touched">
+          Missing user name
+        </mat-error>
+        <mat-error *ngIf="usernameInfo.errors?.minlength && usernameInfo.touched">
+          Minimum two chars
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="form-group col-md-4">
+        <mat-label>Password</mat-label>
+        <input matInput #passwordInfo="ngModel" required minlength="2" type="password" name="Password" id="Password" [(ngModel)]="userPassword">
+        <button mat-button *ngIf="userPassword" matSuffix mat-icon-button aria-label="Clear" (click)="userPassword=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="passwordInfo.errors?.required && passwordInfo.touched">
+          Missing user password
+        </mat-error>
+        <mat-error *ngIf="passwordInfo.errors?.minlength && passwordInfo.touched">
+          Minimum two chars
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="form-group col-md-4">
+        <mat-label>RetypePassword</mat-label>
+        <input matInput #retypePasswordInfo="ngModel" required minlength="2" type="password" name="RetypePassword" id="RetypePassword" [(ngModel)]="userPassword2">
+        <button mat-button *ngIf="userPassword2" matSuffix mat-icon-button aria-label="Clear" (click)="userPassword2=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="retypePasswordInfo.errors?.required && retypePasswordInfo.touched">
+          Missing retype
+        </mat-error>
+        <mat-error *ngIf="retypePasswordInfo.errors?.minlength && retypePasswordInfo.touched">
+          Minimum two chars
+        </mat-error>
+      </mat-form-field>
+      
+    </div>
+          
+    <input type="file" #inputFile (change)="fileChangeEvent($event)">
+    <button mat-button *ngIf="croppedImage" matSuffix mat-icon-button aria-label="Clear" (click)="fileChangeEvent2($event)">
+      <mat-icon>close</mat-icon>
+    </button>
+      <image-cropper
+        [aspectRatio]="1 / 1"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [resizeToWidth]="0"
+        format="extension"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+    <img [src]="croppedImage" style="width:100px" />
+          
+  </div>
+
+  <p *ngIf="signUpError!==''" class="inputValidation">{{signUpError}}</p>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" [disabled]="formInfo.form.invalid" class="btn btn-primary" (click)="signUp()">Sign Up</button>
+    <button type="button" class="btn btn-primary" (click)="signUpAdmin()">Sign Up Admin</button>
+  </div>
+</form> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form [formGroup]="signUpForm">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+  
+      <div class="form-row">
+  
+        <mat-form-field class="form-group col-md-6">
+          <mat-label >FirstName</mat-label>
+          <input matInput formControlName="FirstName" type="text" id="FirstName" [(ngModel)]="userFirstName">
+          <button mat-button *ngIf="userFirstName" matSuffix mat-icon-button aria-label="Clear" (click)="userFirstName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'FirstName')">
+            Missing user first name
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('minlength', 'FirstName')">
+            Minimum two chars
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="form-group col-md-6">
+          <mat-label>LastName</mat-label>
+          <input matInput formControlName="LastName" type="text" id="LastName" [(ngModel)]="userLastName">
+          <button mat-button *ngIf="userLastName" matSuffix mat-icon-button aria-label="Clear" (click)="userLastName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'LastName')">
+            Missing user last name
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('minlength', 'LastName')">
+            Minimum two chars
+          </mat-error>
+        </mat-form-field>
+        
+      </div>
+      
+      <div class="form-row">
+  
+        <mat-form-field class="form-group col-md-6">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="ID" type="text" id="ID" (keypress)="numberOnly($event)" [(ngModel)]="userID">
+          <button mat-button *ngIf="userID" matSuffix mat-icon-button aria-label="Clear" (click)="userID=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'ID')">
+            Missing user last id
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('minlength', 'ID')">
+            Minimum eight chars
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('invalidId', 'ID')">
+            Impossible id
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="form-group col-md-6">
+          <mat-label>BirthDate</mat-label>
+          <input matInput [min]="minDate" [max]="maxDate" (ngModelChange)="userBirthDate = $event" [matDatepicker]="picker" formControlName="BirthDate" type="text" id="BirthDate" [(ngModel)]="userBirthDate">
+          <mat-datepicker-toggle *ngIf="!userBirthDate" matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <button mat-button *ngIf="userBirthDate" matSuffix mat-icon-button aria-label="Clear" (click)="userBirthDate=null">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'BirthDate')">
+            Missing user last birthDate
+          </mat-error>
+        </mat-form-field>
+        
+      </div>
+            
+      <div class="form-row">
+  
+        <mat-form-field class="form-group col-md-6">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="Gender" type="text" id="Gender" [(ngModel)]="userGender">
+            <mat-option *ngFor="let genderChoise of genderChoises" value="{{genderChoise}}">{{ genderChoise }}</mat-option>
+          </mat-select>
+          <button mat-button *ngIf="userGender" matSuffix mat-icon-button aria-label="Clear" (click)="userGender=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'Gender')">
+            Missing user last gender
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="form-group col-md-6">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="Email" type="email" id="Email" [(ngModel)]="userEmail">
+          <button mat-button *ngIf="userEmail" matSuffix mat-icon-button aria-label="Clear" (click)="userEmail=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'Email')">
+            Missing user last email
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('invalidEmailAddress', 'Email')">
+            Invalid Email Address
+          </mat-error>
+        </mat-form-field>
+        
+      </div>
+            
+      <div class="form-row">
+  
+        <mat-form-field class="form-group col-md-4">
+          <mat-label>UserName</mat-label>
+          <input matInput formControlName="UserName" type="text" id="UserName" [(ngModel)]="userNickName">
+          <button mat-button *ngIf="userNickName" matSuffix mat-icon-button aria-label="Clear" (click)="userNickName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'UserName')">
+            Missing user nick name
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('minlength', 'UserName')">
+            Minimum two chars
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="form-group col-md-4">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="Password" type="password" id="Password" [(ngModel)]="userPassword">
+          <button mat-button *ngIf="userPassword" matSuffix mat-icon-button aria-label="Clear" (click)="userPassword=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'Password')">
+            Missing user password
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('minlength', 'Password')">
+            Minimum two chars
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('mustMatch', 'Password')">
+            password dosn't match
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="form-group col-md-4">
+          <mat-label>RetypePassword</mat-label>
+          <input matInput formControlName="RetypePassword" type="password" id="RetypePassword" [(ngModel)]="userPassword2">
+          <button mat-button *ngIf="userPassword2" matSuffix mat-icon-button aria-label="Clear" (click)="userPassword2=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="signUpForm.hasError('required', 'RetypePassword')">
+            Missing user retype password
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('minlength', 'RetypePassword')">
+            Minimum two chars
+          </mat-error>
+          <mat-error *ngIf="signUpForm.hasError('mustMatch', 'RetypePassword')">
+            password dosn't match
+          </mat-error>
+        </mat-form-field>
+        
+      </div>
+            
+      <input type="file" #inputFile (change)="fileChangeEvent($event)">
+      <button mat-button *ngIf="croppedImage" matSuffix mat-icon-button aria-label="Clear" (click)="fileChangeEvent2($event)">
+        <mat-icon>close</mat-icon>
+      </button>
+        <image-cropper
+          [aspectRatio]="1 / 1"
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [resizeToWidth]="0"
+          format="extension"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+      <img [src]="croppedImage" style="width:100px" />
+            
+    </div>
+  
+    <p *ngIf="signUpError!==''" class="ErrorColor">{{signUpError}}</p>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" [disabled]="!signUpForm.valid" class="btn btn-primary" (click)="signUp()">Sign Up</button>
+    </div>
+  </form>

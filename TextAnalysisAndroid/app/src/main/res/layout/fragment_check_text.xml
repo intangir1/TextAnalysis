@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.CheckTextFragment">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lay_input"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="@string/your_text"
+        android:layout_weight="1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine|textFilter|textVisiblePassword|textNoSuggestions"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:scrollbars="vertical">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/rdgrp_modes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/rdbtn_by_sentences"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/by_sentences">
+
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/rdbtn_by_words"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/by_words">
+
+            </RadioButton>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/lay_by_words_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bad_percent_ammount">
+
+            </TextView>
+
+            <SeekBar
+                android:id="@+id/sb_number_of_percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </SeekBar>
+
+            <TextView
+                android:id="@+id/txt_number_of_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lay_result"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:background="@drawable/border">
+
+        <TextView
+            android:id="@+id/txt_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars = "vertical">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_synonims"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/list_of_synonims">
+    </TextView>
+
+    <TextView
+        android:id="@+id/txt_antonyms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/list_of_antonyms">
+    </TextView>
+
+</LinearLayout>

@@ -1,0 +1,94 @@
+<div class="row" style="width:100%">
+  <form #formInfo="ngForm"  class="col-md-12" id="textAn">
+    <div class="form-row">
+      <mat-form-field class="form-group col-md-6" appearance="outline">
+        <mat-label>Enter the text</mat-label>
+        <textarea matInput #textedInfo ="ngModel" required minlength="2" rows="4" name="EnterTheText" id="EnterTheText" class="form-control" [(ngModel)]="textToCheck.textToCheck" (ngModelChange)="ByChange()"></textarea>
+        <button mat-button *ngIf="textToCheck.textToCheck" matSuffix mat-icon-button aria-label="Clear" (click)="clearText()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="textedInfo.errors?.required && textedInfo.touched">
+          Missing text
+        </mat-error>
+        <mat-error *ngIf="textedInfo.errors?.minlength && textedInfo.touched">
+          Minimum two chars
+        </mat-error>
+      </mat-form-field>
+      <div class="form-group col-md-6">
+        <div #template class="ta"></div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div id="gradRepeated" class="col-md-4">Repeated Words Colors</div>
+    </div>
+
+    <div class="form-row">
+      <div id="gradArchaisms" class="col-md-4">Archaism Words Colors</div>
+    </div>
+
+    <div class="form-row">
+      <div id="gradSlangs" class="col-md-4">Slang Words Colors</div>
+    </div>
+
+    <div class="form-row">
+      <div id="gradExpressions" class="col-md-4">Expression Colors</div>
+    </div>
+
+    <div class="form-row border" *ngIf="synonims.length>0">
+      <ul>
+        <li>Synonims of the word are: </li>
+        <li *ngFor="let synonim of synonims; let i = index">
+          <span *ngIf="i<synonims.length-1">{{synonim}}, </span>
+          <span *ngIf="i==synonims.length-1">{{synonim}}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-row border" *ngIf="synonims.length==0">
+      <ul>
+        <li>There Are No Synonims</li>
+      </ul>
+    </div>
+
+    <div class="form-row border" *ngIf="antonims.length>0">
+      <ul>
+        <li>Antonims of the word are: </li>
+        <li *ngFor="let antonim of antonims; let i = index">
+          <span *ngIf="i<antonims.length-1">{{antonim}}, </span>
+          <span *ngIf="i==antonims.length-1">{{antonim}}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-row border" *ngIf="antonims.length==0">
+      <ul>
+        <li>There Are No Antonims</li>
+      </ul>
+    </div>
+    
+    <div class="form-row border">
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group col-md-6" [(ngModel)]="option" [ngModelOptions]="{standalone: true}">
+        <mat-radio-button class="example-radio-button" *ngFor="let option of options" [value]="option" (change)="radioChange($event)">
+          {{option}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+
+      <mat-slider
+      *ngIf="option==='By Words'"
+      #slider
+      class="col-md-6"
+      (input)="pitch($event)"
+      thumbLabel
+      [displayWith]="formatLabel"
+      tickInterval="1"
+      min="1"
+      max="30"
+      [value]="value"></mat-slider>
+
+
+    </div>
+    
+  </form>
+</div>

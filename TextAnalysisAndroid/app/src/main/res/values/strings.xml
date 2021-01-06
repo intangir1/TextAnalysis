@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">TextAnalysis</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_of_synonims">List of synonims:</string>
+    <string name="list_of_antonyms">List of antonyms:</string>
+    <string name="post">POST</string>
+    <string name="put">PUT</string>
+    <string name="insert">INSERT</string>
+    <string name="your_text">Your Text</string>
+    <string name="by_sentences">By sentences</string>
+    <string name="by_words">By Words</string>
+    <string name="bad_percent_ammount">Bad percent amount:</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="enter">Enter</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="id">ID</string>
+    <string name="birthday_dd_mm_yyyy">Birthday (dd-mm-yyyy)</string>
+    <string name="mail">Mail</string>
+    <string name="user_name">User Name</string>
+    <string name="password_again">Password Again</string>
+    <string name="take_a_picture">Take a picture</string>
+    <string name="remove_a_picture">Remove a picture</string>
+    <string name="faq">FAQ</string>
+    <string name="dialog_title_registered">Please, sign in/up</string>
+    <string name="dialog_message_registered">Only registered users may receive a list of synonims and antonyms.</string>
+    <string name="dialog_title_vip">User level not high enough</string>
+    <string name="dialog_message_vip">Only registered users may add new words.</string>
+    <string name="dialog_title_faq">FAQ</string>
+    <string name="dialog_message_faq">
+        This is an Android part of \"Write it Right\" project of Evgeny Likhtman
+    </string>
+    <string name="dialog_title_auto_sign_out">Automatic sign out</string>
+    <string name="dialog_message_auto_sign_out">30 minutes have passed - please log in again</string>
+    <string name="loading_message">Loading Your data, please wait...</string>
+    <string name="dialog_message_server">No connection to the server, please try again later</string>
+    <string name="dialog_title_server">Server error</string>
+    <string name="dialog_message_login">Nickname or password incorrect, please reenter them</string>
+    <string name="dialog_title_login">Login error</string>
+    <string name="toast_success_log_in">Successfully logged in</string>
+    <string name="dialog_message_received">The inputed data was already received</string>
+    <string name="dialog_title_received">Data already received</string>
+    <string name="dialog_message_get_all_error">The list of words wasn\'t received from the server, please try refreshing the page</string>
+    <string name="dialog_title_get_all_error">Server download error</string>
+    <string name="help">Help</string>
+    <string name="dialog_title_color">Color shades explained</string>
+    <string name="dialog_message_color">Red: repeats\nBlue: slangs\nGreen: archaisms\nPink: regular expression</string>
+</resources>

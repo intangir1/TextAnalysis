@@ -1,0 +1,100 @@
+package com.likhtman.TextAnalysis.Managers.HttpClient;
+
+import android.os.AsyncTask;
+
+
+import com.likhtman.TextAnalysis.Callbacks.CallbacksWebApi;
+import com.likhtman.TextAnalysis.StorageDataFromServer;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class ApiDeleteManager extends AsyncTask<String, Void, String> {
+    private CallbacksWebApi callbacks; // Notify to activity what happened.
+    private int httpStatusCode; // Http status code.
+    private String errorMessage; // Error message.
+    private String link;
+
+    // Constructor:
+    public ApiDeleteManager(CallbacksWebApi callbacks) {
+        this.callbacks = callbacks;
+    }
+
+    // Executes before doInBackground in the UI's thread:
+    protected void onPreExecute() {
+        callbacks.onAboutToBegin();
+    }
+
+    // Executes in the background in a different thread than the UI's thread:
+    protected String doInBackground(String... params) {
+        InputStream inputStream = null;
+        InputStreamReader inputStreamReader = null;
+        BufferedReader bufferedReader = null;
+
+        try {
+            // Take given link:
+            link = params[0];
+            // Create a url:
+            URL url = new URL(link);
+
+            // Open connection:
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Content-Type","application/json");
+            connection.setRequestProperty("Authorization","Bearer " + StorageDataFromServer.Get_instance().getUserToken());
+            connection.setRequestProperty("frontType", "android");
+
+            // Check for failure:
+            httpStatusCode = connection.getResponseCode();
+            if (connection.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
+                errorMessage = connection.getResponseMessage(); // Can be null.
+                return null;
+            }
+
+            // Create readers:
+            inputStream = connection.getInputStream();
+            inputStreamReader = new InputStreamReader(inputStream);
+            bufferedReader = new BufferedReader(inputStreamReader);
+
+            // Read downloaded text:
+            StringBuilder downloadedText = new StringBuilder();
+            String oneLine = bufferedReader.readLine();
+            while(oneLine != null) {
+                downloadedText.append(oneLine);
+                oneLine = bufferedReader.readLine();
+                if(oneLine != null){
+                    downloadedText.append("\n");
+                }
+            }
+
+            // Return result:
+            return downloadedText.toString();
+        }
+        catch(Exception ex) {
+            errorMessage = ex.getMessage(); // Can be null.
+            return null;
+        }
+        finally { // Close readers:
+            if(bufferedReader != null)
+                try { bufferedReader.close(); } catch (Exception e) { }
+            if(inputStreamReader != null)
+                try { inputStreamReader.close(); } catch (Exception e) { }
+            if(inputStream != null)
+                try { inputStream.close(); } catch (Exception e) { }
+        }
+    }
+
+    // Executes after doInBackground in the UI's thread:
+    protected void onPostExecute(String downloadedText) {
+        if(downloadedText != null) // Don't check errorMessage cause it can be null even if there is an error.
+        {
+            callbacks.onSuccess(downloadedText, httpStatusCode);
+        }
+        else
+            callbacks.onError(httpStatusCode, errorMessage);
+    }
+}
+

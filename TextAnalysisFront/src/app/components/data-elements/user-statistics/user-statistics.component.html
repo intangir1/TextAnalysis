@@ -1,0 +1,98 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Search From</mat-label>
+  <input matInput [matDatepicker]="fromPicker" #fromInfo="ngModel" name="SearchFrom" id="SearchFrom" [ngModel]="from" (ngModelChange)="from = $event">
+  <mat-datepicker-toggle *ngIf="!from" matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+  <mat-datepicker #fromPicker></mat-datepicker>
+  <button mat-button *ngIf="from" matSuffix mat-icon-button aria-label="Clear" (click)="from=null">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Search To</mat-label>
+  <input matInput [matDatepicker]="toPicker" #fromInfo="ngModel" name="SearchTo" id="SearchTo" [ngModel]="to" (ngModelChange)="to = $event">
+  <mat-datepicker-toggle *ngIf="!to" matSuffix [for]="toPicker"></mat-datepicker-toggle>
+  <mat-datepicker #toPicker></mat-datepicker>
+  <button mat-button *ngIf="to" matSuffix mat-icon-button aria-label="Clear" (click)="to=null">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<button mat-stroked-button color="primary" (click)="Search()">Search</button>
+
+
+  
+<table mat-table *ngIf="dataSource!=null" matSort [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="userID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userID</th>
+    <td mat-cell *matCellDef="let element">{{element.userID}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="userFirstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userFirstName</th>
+    <td mat-cell *matCellDef="let element">{{element.userFirstName}}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="userLastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userLastName</th>
+    <td mat-cell *matCellDef="let element">{{element.userLastName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="userNickName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userNickName</th>
+    <td mat-cell *matCellDef="let element">{{element.userNickName}}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="userEmail">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userEmail</th>
+    <td mat-cell *matCellDef="let element">{{element.userEmail}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="userGender">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userGender</th>
+    <td mat-cell *matCellDef="let element">{{element.userGender}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="userBirthDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userBirthDate</th>
+    <td mat-cell *matCellDef="let element">{{element.userBirthDate | date }}</td>
+  </ng-container>
+
+  <ng-container *ngIf="mUrl!==''" matColumnDef="userPicture">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userPicture</th>
+    <td mat-cell *matCellDef="let element"><img class="rounded-circle" style="width: 30px" src='{{mUrl}}{{element.userPicture}}' onerror="this.onerror=null;this.src='../../../assets/images/no-image.png';" alt="Card image cap"></td>
+  </ng-container>
+
+  <ng-container *ngIf="mUrl===''" matColumnDef="userPicture">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userPicture</th>
+    <td mat-cell *matCellDef="let element"><img class="rounded-circle" style="width: 30px" src='{{element.userPicture}}' onerror="this.onerror=null;this.src='../../../assets/images/no-image.png';" alt="Card image cap"></td>
+  </ng-container>
+  
+  <ng-container matColumnDef="userRole">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userRole</th>
+    <td mat-cell *matCellDef="let element">{{element.userRole}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="userRegistrationDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userRegistrationDate</th>
+    <td mat-cell *matCellDef="let element">{{element.userRegistrationDate | date:'medium' }}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="userLoginDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>userLoginDate</th>
+    <td mat-cell *matCellDef="let element">{{element.userLoginDate | date:'medium' }}</td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+  
+<div *ngIf="dataSource==null"  class="row justify-content-md-center">
+    <p>There Is No Data - Add Data</p>
+</div>
